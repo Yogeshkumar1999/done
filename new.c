@@ -207,7 +207,7 @@ void *agent_B (void *in) {
 }
 
 
-void *smoker_pen (void *in) {						
+void *student_pen (void *in) {						
     while (1) {
         sem_wait (&Sempen);
         pthread_mutex_lock (&exam);  
@@ -224,7 +224,7 @@ void *smoker_pen (void *in) {
     }
 }
 
-void *smoker_paper (void *in) {							
+void *student_paper (void *in) {							
     while (1) {
         sem_wait (&SemPaper);
         pthread_mutex_lock (&exam);  
@@ -242,7 +242,7 @@ void *smoker_paper (void *in) {
 }
 
 
-void *smoker_Question_paper (void *in) {						
+void *student_Question_paper (void *in) {						
     while (1) {
         sem_wait (&SemQuestion_paper);
         pthread_mutex_lock (&exam);
@@ -273,9 +273,9 @@ int main () {
     sem_init (&Sempen, 1, 0);
     sem_init (&SemQuestion_paper, 1, 0);
     pthread_create(&Agent, NULL, &agent, NULL);
-    pthread_create(&students[0], NULL, &smoker_paper, NULL);
-    pthread_create(&students[1], NULL, &smoker_pen, NULL);
-    pthread_create(&students[2], NULL, &smoker_Question_paper, NULL);
+    pthread_create(&students[0], NULL, &student_paper, NULL);
+    pthread_create(&students[1], NULL, &student_pen, NULL);
+    pthread_create(&students[2], NULL, &student_Question_paper, NULL);
     pthread_create(&Agent_A, NULL, &agent_A, NULL);
     pthread_create(&Agent_B, NULL, &agent_B, NULL);
     pthread_create(&Agent_C, NULL, &agent_C, NULL);
